@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>School Quiz</title>
+  <title>Micheal Melaku Year 5 (Week 1 To 3) Quiz</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -282,7 +282,7 @@
       let form = document.getElementById("quiz-form");
       let score = 0;
       currentQuiz.questions.forEach((item, index) => {
-        let selected = form[`q${index}`].value;
+        let selected = form[`q${index}`] ? form[`q${index}`].value : null;
         let options = form[`q${index}`];
         for (let i=0; i<options.length; i++) {
           if (i == item.a) {
@@ -293,10 +293,14 @@
           }
           options[i].disabled = true;
         }
-        if (selected == item.a) score++;
+       
+        if (selected !== null && parseInt(selected) === item.a) {
+  score++;
+}
       });
       document.getElementById("result").textContent = `You scored ${score} out of ${currentQuiz.questions.length}`;
     }
   </script>
 </body>
 </html>
+
