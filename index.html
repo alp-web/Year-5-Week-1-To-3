@@ -21,18 +21,19 @@
       gap: 15px;
       margin: 20px 0;
     }
-    .subject {
-      background: #4CAF50;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .subject:hover {
-      background: #45a049;
-    }
+    .subject-btn {
+  background: #4CAF50;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s;
+}
+.subject-btn:hover {
+  background: #45a049;
+}
     #quiz-container {
       display: none;
       margin-top: 20px;
@@ -90,15 +91,15 @@
   <h1>Micheal Melaku Year 5 (Week 1 To 3) Quiz</h1>
   <h2>Select a Subject</h2>
 
-  <div class="subjects">
-    <div class="subject" onclick="startQuiz('english')">English</div>
-    <div class="subject" onclick="startQuiz('math')">Mathematics</div>
-    <div class="subject" onclick="startQuiz('science')">Science</div>
-    <div class="subject" onclick="startQuiz('geography')">Geography</div>
-    <div class="subject" onclick="startQuiz('history')">History</div>
-    <div class="subject" onclick="startQuiz('pshe')">P.S.H.E</div>
-    <div class="subject" onclick="startQuiz('computing')">Computing</div>
-  </div>
+<div class="subjects">
+  <button class="subject subject-btn" onclick="startQuiz('english')">English</button>
+  <button class="subject subject-btn" onclick="startQuiz('math')">Mathematics</button>
+  <button class="subject subject-btn" onclick="startQuiz('science')">Science</button>
+  <button class="subject subject-btn" onclick="startQuiz('geography')">Geography</button>
+  <button class="subject subject-btn" onclick="startQuiz('history')">History</button>
+  <button class="subject subject-btn" onclick="startQuiz('pshe')">P.S.H.E</button>
+  <button class="subject subject-btn" onclick="startQuiz('computing')">Computing</button>
+</div>
 
   <div id="quiz-container">
     <h2 id="quiz-title"></h2>
@@ -310,6 +311,7 @@ document.querySelectorAll(".subject-btn").forEach(btn => {
   </script>
 </body>
 </html>
+
 
 
 
