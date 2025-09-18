@@ -239,6 +239,7 @@
       document.getElementById("quiz-container").style.display = "block";
       document.getElementById("quiz-form").innerHTML = "";
       document.getElementById("result").innerHTML = "";
+      document.getElementById("submitBtn").disabled = false;
 // Disable all subject buttons once a quiz starts
 document.querySelectorAll(".subject-btn").forEach(btn => {
   btn.disabled = true;
@@ -262,17 +263,23 @@ document.querySelectorAll(".subject-btn").forEach(btn => {
 }
       });
 
-      timeLeft = currentQuiz.time;
-      updateTimer();
-      clearInterval(timerInterval);
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        updateTimer();
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          submitQuiz();
-        }
-      }, 1000);
+     // Clear any previous timer
+clearInterval(timerInterval);
+
+// Initialize timer
+timeLeft = currentQuiz.time;
+updateTimer(); // show initial time immediately
+
+// Start countdown
+timerInterval = setInterval(() => {
+  timeLeft--;
+  updateTimer();
+  if (timeLeft <= 0) {
+    clearInterval(timerInterval);
+    submitQuiz(); // auto-submit when time is up
+  }
+}, 1000);
+
     }
 
     function updateTimer() {
@@ -285,23 +292,21 @@ document.querySelectorAll(".subject-btn").forEach(btn => {
       clearInterval(timerInterval);
       let form = document.getElementById("quiz-form");
       let score = 0;
-      currentQuiz.questions.forEach((item, index) => {
-        let selected = form[`q${index}`] ? form[`q${index}`].value : null;
-        let options = form[`q${index}`];
-        for (let i=0; i<options.length; i++) {
-          if (i == item.a) {
-            options[i].parentNode.classList.add("correct");
-          }
-          if (options[i].checked && i != item.a) {
-            options[i].parentNode.classList.add("incorrect");
-          }
-          options[i].disabled = true;
-        }
-       
-        if (selected !== null && parseInt(selected) === item.a) {
-  score++;
-}
-      });
+     currentQuiz.questions.forEach((item, index) => {
+  let options = document.querySelectorAll(`input[name="q${index}"]`);
+  let answered = false;
+  options.forEach((opt, i) => {
+    if (i === item.a) opt.parentNode.classList.add("correct");
+    if (opt.checked && i !== item.a) opt.parentNode.classList.add("incorrect");
+    if (opt.checked) answered = true;
+    opt.disabled = true;
+  });
+  if (answered) {
+    let selectedIndex = Array.from(options).findIndex(o => o.checked);
+    if (selectedIndex === item.a) score++;
+  }
+});
+
       document.getElementById("result").textContent = `You scored ${score} out of ${currentQuiz.questions.length}`;
     } // ✅ Step 4: re-enable subject buttons after quiz ends
   document.querySelectorAll(".subject-btn").forEach(btn => {
@@ -311,6 +316,7 @@ document.querySelectorAll(".subject-btn").forEach(btn => {
   </script>
 </body>
 </html>
+
 
 
 
