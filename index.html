@@ -1,324 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Micheal Melaku Year 5 (Week 1 To 3) Quiz</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      margin: 0;
-      padding: 20px;
-      color: #333;
-    }
-    h1, h2 {
-      text-align: center;
-    }
-    .subjects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      margin: 20px 0;
-    }
-    .subject-btn {
-  background: #4CAF50;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-  border: none;
-  transition: background 0.3s;
-}
-.subject-btn:hover {
-  background: #45a049;
-}
-    #quiz-container {
-      display: none;
-      margin-top: 20px;
-      padding: 20px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    .question {
-      margin-bottom: 20px;
-    }
-    .options label {
-      display: block;
-      margin-bottom: 5px;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .options input {
-      margin-right: 10px;
-    }
-    .options label:hover {
-      background: #f1f1f1;
-    }
-    .correct {
-      background-color: #c8e6c9;
-    }
-    .incorrect {
-      background-color: #ffcdd2;
-    }
-    .hidden {
-      display: none;
-    }
-    #timer {
-      font-size: 18px;
-      font-weight: bold;
-      text-align: center;
-      margin: 10px 0;
-      color: #e53935;
-    }
-    #submitBtn {
-  display: none; /* hide it completely */
-}
-    #result {
-      text-align: center;
-      font-size: 20px;
-      font-weight: bold;
-      margin-top: 20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Year 5 Quiz</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 20px; color: #333; }
+  h1, h2 { text-align: center; }
+  .subjects { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin: 20px 0; }
+  .subject-btn { background: #4CAF50; color: white; padding: 20px; border-radius: 10px; cursor: pointer; border: none; transition: background 0.3s; }
+  .subject-btn:hover { background: #45a049; }
+  #quiz-container { display: none; margin-top: 20px; padding: 20px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .question { margin-bottom: 20px; }
+  .options label { display: block; margin-bottom: 5px; padding: 8px; border: 1px solid #ddd; border-radius: 6px; cursor: pointer; transition: 0.2s; }
+  .options input { margin-right: 10px; }
+  .options label:hover { background: #f1f1f1; }
+  .correct { background-color: #c8e6c9; }
+  .incorrect { background-color: #ffcdd2; }
+  #timer { font-size: 18px; font-weight: bold; text-align: center; margin: 10px 0; color: #e53935; }
+  #reviewNote { display: none; color: blue; font-weight: bold; text-align: center; margin-bottom: 10px; }
+  #submitBtn { display:block; margin:0 auto; padding:10px 20px; font-size:16px; }
+  #result { text-align: center; font-size: 20px; font-weight: bold; margin-top: 20px; }
+</style>
 </head>
 <body>
-  <h1>Micheal Melaku Year 5 (Week 1 To 3) Quiz</h1>
-  <h2>Select a Subject</h2>
+<h1>Year 5 Quiz</h1>
+<h2>Select a Subject</h2>
 
 <div class="subjects">
-  <button class="subject subject-btn" onclick="startQuiz('english')">English</button>
-  <button class="subject subject-btn" onclick="startQuiz('math')">Mathematics</button>
-  <button class="subject subject-btn" onclick="startQuiz('science')">Science</button>
-  <button class="subject subject-btn" onclick="startQuiz('geography')">Geography</button>
-  <button class="subject subject-btn" onclick="startQuiz('history')">History</button>
-  <button class="subject subject-btn" onclick="startQuiz('pshe')">P.S.H.E</button>
-  <button class="subject subject-btn" onclick="startQuiz('computing')">Computing</button>
+  <button class="subject-btn" onclick="startQuiz('english')">English</button>
+  <button class="subject-btn" onclick="startQuiz('math')">Mathematics</button>
+  <button class="subject-btn" onclick="startQuiz('science')">Science</button>
+  <button class="subject-btn" onclick="startQuiz('geography')">Geography</button>
+  <button class="subject-btn" onclick="startQuiz('history')">History</button>
+  <button class="subject-btn" onclick="startQuiz('pshe')">P.S.H.E</button>
+  <button class="subject-btn" onclick="startQuiz('computing')">Computing</button>
 </div>
 
-  <div id="quiz-container">
-    <h2 id="quiz-title"></h2>
-    <div id="timer">Time: 00:00</div>
-    <form id="quiz-form"></form>
-    <p id="reviewNote" style="display:none; color:blue; font-weight:bold;">
-  ✅ You have answered all questions. Please review your answers until the timer ends.
-</p>
-    <button id="submitBtn" onclick="submitQuiz()" disabled>Submit Answers</button>
+<div id="quiz-container">
+  <h2 id="quiz-title"></h2>
+  <div id="timer">Time: 00:00</div>
+  <form id="quiz-form"></form>
+  <p id="reviewNote">✅ You have answered all questions. Please review your answers until the timer ends.</p>
+  <button id="submitBtn" onclick="submitQuiz()" disabled>Submit Answers</button>
+  <div id="result"></div>
+</div>
 
-    <div id="result"></div>
-  </div>
+<script>
+const quizzes = {
+  english: { time:10*60, title:"English Quiz", questions:[
+    {q:"Which word has the prefix 'un-'?", o:["redo","unhappy","dislike","reading"], a:1},
+    {q:"Which suffix means 'happening now'?", o:["-ed","-ing","-s","-ly"], a:1},
+    {q:"What is the root word of 'gracious'?", o:["grace","gra","grac","ious"], a:0},
+    {q:"Which word means 'evil or cruel'?", o:["vicious","gracious","delicious","precious"], a:0},
+    {q:"Which of these is an exception word?", o:["enough","jumped","quickly","runner"], a:0},
+    {q:"Which word means 'good manners'?", o:["suspicious","malicious","gracious","ferocious"], a:2},
+    {q:"Which word describes something 'tasty'?", o:["delicious","vicious","malicious","spacious"], a:0},
+    {q:"Which is a suffix?", o:["un-","dis-","-ed","re-"], a:2},
+    {q:"Which of these means 'big space'?", o:["suspicious","spacious","ferocious","malicious"], a:1},
+    {q:"What book are students reading?", o:["Matilda","Oliver Twist","Alice in Wonderland","The Hobbit"], a:0}
+  ]},
+  math: { time:30*60, title:"Mathematics Quiz", questions:[
+    {q:"What is the value of 7 in 576,321?", o:["700","70,000","7","7,000"], a:1},
+    {q:"Round 45,678 to the nearest 1000.", o:["45,000","46,000","45,700","45,600"], a:1},
+    {q:"What comes next: 10,000; 20,000; 30,000; ...?", o:["35,000","40,000","50,000","60,000"], a:1},
+    {q:"Solve: 325,000 - 24,000 = ?", o:["301,000","299,000","301,000","311,000"], a:0},
+    {q:"Which number is greater?", o:["456,789","654,789","546,789","446,789"], a:1},
+    {q:"Round 999,999 to nearest 10.", o:["999,990","1,000,000","999,900","999,950"], a:1},
+    {q:"What is 25,000 + 75,000?", o:["10,000","50,000","100,000","90,000"], a:2},
+    {q:"Which place value is the '5' in 5,678?", o:["Thousands","Hundreds","Tens","Ones"], a:0},
+    {q:"Round 348,999 to nearest 100.", o:["349,000","348,900","348,000","349,100"], a:0},
+    {q:"What comes before 1,000,000?", o:["999,999","1,000,001","999,900","100,000"], a:0}
+  ]},
+  science: { time:15*60, title:"Science Quiz", questions:[
+    {q:"Which is a characteristic of living things?", o:["Can move","Made of cells","Grow","All of these"], a:3},
+    {q:"Which is NOT a living thing?", o:["Dog","Tree","Rock","Fish"], a:2},
+    {q:"How do scientists classify living things?", o:["Shape","Color","Classification keys","Size"], a:2},
+    {q:"Which of these is a mammal?", o:["Frog","Dog","Eagle","Snake"], a:1},
+    {q:"Which biome is very dry?", o:["Rainforest","Desert","Tundra","Ocean"], a:1},
+    {q:"Which biome is very cold?", o:["Polar","Desert","Rainforest","Savanna"], a:0},
+    {q:"What do mammals produce to feed young?", o:["Eggs","Milk","Seeds","Bones"], a:1},
+    {q:"Which is an example of a life cycle?", o:["Rock cycle","Water cycle","Frog life stages","Carbon cycle"], a:2},
+    {q:"What do plants need to live?", o:["Water and light","Food","Meat","None"], a:0},
+    {q:"Which group has humans?", o:["Reptiles","Mammals","Birds","Fish"], a:1}
+  ]},
+  geography: { time:12*60, title:"Geography Quiz", questions:[
+    {q:"What is a climate zone?", o:["A type of country","An area with similar weather","A forest","A desert"], a:1},
+    {q:"Which is a tropical climate?", o:["Cold and icy","Hot and rainy","Mild","Dry"], a:1},
+    {q:"Which is a polar climate?", o:["Snowy and icy","Hot","Rainy","Windy"], a:0},
+    {q:"Which zone is between tropical and polar?", o:["Temperate","Desert","Rainforest","Ocean"], a:0},
+    {q:"Which biome is hot and wet?", o:["Rainforest","Tundra","Desert","Polar"], a:0},
+    {q:"Which biome is cold with few plants?", o:["Desert","Rainforest","Tundra","Savanna"], a:2},
+    {q:"Which animals live in deserts?", o:["Camels","Penguins","Polar bears","Whales"], a:0},
+    {q:"Which plants live in deserts?", o:["Cactus","Oak trees","Rainforest vines","Pine"], a:0},
+    {q:"Which biome has lions?", o:["Savanna","Tundra","Polar","Rainforest"], a:0},
+    {q:"Which biome has kangaroos?", o:["Australia grasslands","Tundra","Polar","Ocean"], a:0}
+  ]},
+  history: { time:12*60, title:"History Quiz", questions:[
+    {q:"When did the Victorian Era begin?", o:["1820","1837","1901","1850"], a:1},
+    {q:"When did the Victorian Era end?", o:["1910","1901","1890","1920"], a:1},
+    {q:"Which queen ruled?", o:["Elizabeth I","Victoria","Anne","Mary"], a:1},
+    {q:"What was a key theme?", o:["Industrialization","Modern art","Space travel","Digital age"], a:0},
+    {q:"Which invention changed cities?", o:["Steam engine","Computer","Car","Television"], a:0},
+    {q:"What was common in Victorian cities?", o:["Clean water","Overcrowding","Tall buildings","Cars"], a:1},
+    {q:"What did children often do?", o:["Work in factories","Play video games","Go to college","Drive cars"], a:0},
+    {q:"Which empire expanded?", o:["British","Roman","American","French"], a:0},
+    {q:"Which invention was NOT Victorian?", o:["Telephone","Steam train","Internet","Telegraph"], a:2},
+    {q:"What year was Queen Victoria born?", o:["1819","1837","1825","1850"], a:0}
+  ]},
+  pshe: { time:10*60, title:"P.S.H.E Quiz", questions:[
+    {q:"What makes a good friend?", o:["Trust","Kindness","Respect","All of these"], a:3},
+    {q:"What is peer influence?", o:["Doing homework","Friends affecting choices","Watching TV","Reading books"], a:1},
+    {q:"Which is a positive peer influence?", o:["Cheating","Helping with studies","Skipping school","Bullying"], a:1},
+    {q:"How do we include others?", o:["Ignore them","Invite them","Laugh at them","Exclude them"], a:1},
+    {q:"What does healthy friendship need?", o:["Trust","Respect","Kindness","All of these"], a:3},
+    {q:"Which is unkind?", o:["Sharing","Bullying","Helping","Caring"], a:1},
+    {q:"Why is inclusion important?", o:["It makes people feel safe","It makes people feel left out","It makes people sad","It is bad"], a:0},
+    {q:"What should you do if someone feels left out?", o:["Ignore","Include them","Tease them","Leave"], a:1},
+    {q:"Which is peer pressure?", o:["Friends ask you to try smoking","Teacher gives homework","Parents cook dinner","Reading a book"], a:0},
+    {q:"Which is a respectful action?", o:["Interrupting","Listening","Bullying","Excluding"], a:1}
+  ]},
+  computing: { time:10*60, title:"Computing Quiz", questions:[
+    {q:"What is Scratch?", o:["A game","A coding program","A movie","A website"], a:1},
+    {q:"Which block starts a Scratch program?", o:["When green flag clicked","Jump","Run","Start"], a:0},
+    {q:"Which block makes a sprite move?", o:["Say","Move 10 steps","Repeat","Wait"], a:1},
+    {q:"What is a sprite?", o:["A drink","A character in Scratch","A program","An animal"], a:1},
+    {q:"Which block repeats actions?", o:["Move","Say","Repeat","Jump"], a:2},
+    {q:"What type of coding does Scratch use?", o:["Text coding","Block coding","Binary","HTML"], a:1},
+    {q:"Which block makes sound?", o:["Sound","Motion","Events","Looks"], a:0},
+    {q:"Which block shows speech?", o:["Say","Move","Sound","Repeat"], a:0},
+    {q:"Which button runs the project?", o:["Red stop","Green flag","Blue arrow","Yellow box"], a:1},
+    {q:"What can you create in Scratch?", o:["Games","Animations","Stories","All of these"], a:3}
+  ]}
+};
 
-  <script>
-    const quizzes = {
-      english: {
-        time: 10 * 60, // 10 min
-        title: "English Quiz",
-        questions: [
-          {q: "Which word has the prefix 'un-'?", o: ["redo", "unhappy", "dislike", "reading"], a: 1},
-          {q: "Which suffix means 'happening now'?", o: ["-ed", "-ing", "-s", "-ly"], a: 1},
-          {q: "What is the root word of 'gracious'?", o: ["grace", "gra", "grac", "ious"], a: 0},
-          {q: "Which word means 'evil or cruel'?", o: ["vicious", "gracious", "delicious", "precious"], a: 0},
-          {q: "Which of these is an exception word?", o: ["enough", "jumped", "quickly", "runner"], a: 0},
-          {q: "Which word means 'good manners'?", o: ["suspicious", "malicious", "gracious", "ferocious"], a: 2},
-          {q: "Which word describes something 'tasty'?", o: ["delicious", "vicious", "malicious", "spacious"], a: 0},
-          {q: "Which is a suffix?", o: ["un-", "dis-", "-ed", "re-"], a: 2},
-          {q: "Which of these means 'big space'?", o: ["suspicious", "spacious", "ferocious", "malicious"], a: 1},
-          {q: "What book are students reading?", o: ["Matilda", "Oliver Twist", "Alice in Wonderland", "The Hobbit"], a: 0}
-        ]
-      },
-      math: {
-        time: 30 * 60, // 30 min
-        title: "Mathematics Quiz",
-        questions: [
-          {q: "What is the value of 7 in 576,321?", o: ["700", "70,000", "7", "7,000"], a: 1},
-          {q: "Round 45,678 to the nearest 1000.", o: ["45,000", "46,000", "45,700", "45,600"], a: 1},
-          {q: "What comes next: 10,000; 20,000; 30,000; ...?", o: ["35,000", "40,000", "50,000", "60,000"], a: 1},
-          {q: "Solve: 325,000 - 24,000 = ?", o: ["301,000", "299,000", "301,000", "311,000"], a: 0},
-          {q: "Which number is greater?", o: ["456,789", "654,789", "546,789", "446,789"], a: 1},
-          {q: "Round 999,999 to nearest 10.", o: ["999,990", "1,000,000", "999,900", "999,950"], a: 1},
-          {q: "What is 25,000 + 75,000?", o: ["10,000", "50,000", "100,000", "90,000"], a: 2},
-          {q: "Which place value is the '5' in 5,678?", o: ["Thousands", "Hundreds", "Tens", "Ones"], a: 0},
-          {q: "Round 348,999 to nearest 100.", o: ["349,000", "348,900", "348,000", "349,100"], a: 0},
-          {q: "What comes before 1,000,000?", o: ["999,999", "1,000,001", "999,900", "100,000"], a: 0}
-        ]
-      },
-      science: {
-        time: 15 * 60,
-        title: "Science Quiz",
-        questions: [
-          {q: "Which is a characteristic of living things?", o: ["Can move", "Made of cells", "Grow", "All of these"], a: 3},
-          {q: "Which is NOT a living thing?", o: ["Dog", "Tree", "Rock", "Fish"], a: 2},
-          {q: "How do scientists classify living things?", o: ["Shape", "Color", "Classification keys", "Size"], a: 2},
-          {q: "Which of these is a mammal?", o: ["Frog", "Dog", "Eagle", "Snake"], a: 1},
-          {q: "Which biome is very dry?", o: ["Rainforest", "Desert", "Tundra", "Ocean"], a: 1},
-          {q: "Which biome is very cold?", o: ["Polar", "Desert", "Rainforest", "Savanna"], a: 0},
-          {q: "What do mammals produce to feed young?", o: ["Eggs", "Milk", "Seeds", "Bones"], a: 1},
-          {q: "Which is an example of a life cycle?", o: ["Rock cycle", "Water cycle", "Frog life stages", "Carbon cycle"], a: 2},
-          {q: "What do plants need to live?", o: ["Water and light", "Food", "Meat", "None"], a: 0},
-          {q: "Which group has humans?", o: ["Reptiles", "Mammals", "Birds", "Fish"], a: 1}
-        ]
-      },
-      geography: {
-        time: 12 * 60,
-        title: "Geography Quiz",
-        questions: [
-          {q: "What is a climate zone?", o: ["A type of country", "An area with similar weather", "A forest", "A desert"], a: 1},
-          {q: "Which is a tropical climate?", o: ["Cold and icy", "Hot and rainy", "Mild", "Dry"], a: 1},
-          {q: "Which is a polar climate?", o: ["Snowy and icy", "Hot", "Rainy", "Windy"], a: 0},
-          {q: "Which zone is between tropical and polar?", o: ["Temperate", "Desert", "Rainforest", "Ocean"], a: 0},
-          {q: "Which biome is hot and wet?", o: ["Rainforest", "Tundra", "Desert", "Polar"], a: 0},
-          {q: "Which biome is cold with few plants?", o: ["Desert", "Rainforest", "Tundra", "Savanna"], a: 2},
-          {q: "Which animals live in deserts?", o: ["Camels", "Penguins", "Polar bears", "Whales"], a: 0},
-          {q: "Which plants live in deserts?", o: ["Cactus", "Oak trees", "Rainforest vines", "Pine"], a: 0},
-          {q: "Which biome has lions?", o: ["Savanna", "Tundra", "Polar", "Rainforest"], a: 0},
-          {q: "Which biome has kangaroos?", o: ["Australia grasslands", "Tundra", "Polar", "Ocean"], a: 0}
-        ]
-      },
-      history: {
-        time: 12 * 60,
-        title: "History Quiz",
-        questions: [
-          {q: "When did the Victorian Era begin?", o: ["1820", "1837", "1901", "1850"], a: 1},
-          {q: "When did the Victorian Era end?", o: ["1910", "1901", "1890", "1920"], a: 1},
-          {q: "Which queen ruled?", o: ["Elizabeth I", "Victoria", "Anne", "Mary"], a: 1},
-          {q: "What was a key theme?", o: ["Industrialization", "Modern art", "Space travel", "Digital age"], a: 0},
-          {q: "Which invention changed cities?", o: ["Steam engine", "Computer", "Car", "Television"], a: 0},
-          {q: "What was common in Victorian cities?", o: ["Clean water", "Overcrowding", "Tall buildings", "Cars"], a: 1},
-          {q: "What did children often do?", o: ["Work in factories", "Play video games", "Go to college", "Drive cars"], a: 0},
-          {q: "Which empire expanded?", o: ["British", "Roman", "American", "French"], a: 0},
-          {q: "Which invention was NOT Victorian?", o: ["Telephone", "Steam train", "Internet", "Telegraph"], a: 2},
-          {q: "What year was Queen Victoria born?", o: ["1819", "1837", "1825", "1850"], a: 0}
-        ]
-      },
-      pshe: {
-        time: 10 * 60,
-        title: "P.S.H.E Quiz",
-        questions: [
-          {q: "What makes a good friend?", o: ["Trust", "Kindness", "Respect", "All of these"], a: 3},
-          {q: "What is peer influence?", o: ["Doing homework", "Friends affecting choices", "Watching TV", "Reading books"], a: 1},
-          {q: "Which is a positive peer influence?", o: ["Cheating", "Helping with studies", "Skipping school", "Bullying"], a: 1},
-          {q: "How do we include others?", o: ["Ignore them", "Invite them", "Laugh at them", "Exclude them"], a: 1},
-          {q: "What does healthy friendship need?", o: ["Trust", "Respect", "Kindness", "All of these"], a: 3},
-          {q: "Which is unkind?", o: ["Sharing", "Bullying", "Helping", "Caring"], a: 1},
-          {q: "Why is inclusion important?", o: ["It makes people feel safe", "It makes people feel left out", "It makes people sad", "It is bad"], a: 0},
-          {q: "What should you do if someone feels left out?", o: ["Ignore", "Include them", "Tease them", "Leave"], a: 1},
-          {q: "Which is peer pressure?", o: ["Friends ask you to try smoking", "Teacher gives homework", "Parents cook dinner", "Reading a book"], a: 0},
-          {q: "Which is a respectful action?", o: ["Interrupting", "Listening", "Bullying", "Excluding"], a: 1}
-        ]
-      },
-      computing: {
-        time: 10 * 60,
-        title: "Computing Quiz",
-        questions: [
-          {q: "What is Scratch?", o: ["A game", "A coding program", "A movie", "A website"], a: 1},
-          {q: "Which block starts a Scratch program?", o: ["When green flag clicked", "Jump", "Run", "Start"], a: 0},
-          {q: "Which block makes a sprite move?", o: ["Say", "Move 10 steps", "Repeat", "Wait"], a: 1},
-          {q: "What is a sprite?", o: ["A drink", "A character in Scratch", "A program", "An animal"], a: 1},
-          {q: "Which block repeats actions?", o: ["Move", "Say", "Repeat", "Jump"], a: 2},
-          {q: "What type of coding does Scratch use?", o: ["Text coding", "Block coding", "Binary", "HTML"], a: 1},
-          {q: "Which block makes sound?", o: ["Sound", "Motion", "Events", "Looks"], a: 0},
-          {q: "Which block shows speech?", o: ["Say", "Move", "Sound", "Repeat"], a: 0},
-          {q: "Which button runs the project?", o: ["Red stop", "Green flag", "Blue arrow", "Yellow box"], a: 1},
-          {q: "What can you create in Scratch?", o: ["Games", "Animations", "Stories", "All of these"], a: 3}
-        ]
-      }
-    };
+let currentQuiz = null;
+let timeLeft = 0;
+let timerInterval;
 
-    let currentQuiz = null;
-    let timeLeft = 0;
-    let timerInterval;
+function startQuiz(subject){
+  currentQuiz = quizzes[subject];
+  document.getElementById("quiz-title").textContent = currentQuiz.title;
+  document.getElementById("quiz-container").style.display = "block";
+  document.getElementById("quiz-form").innerHTML = "";
+  document.getElementById("result").innerHTML = "";
+  document.getElementById("reviewNote").style.display="none";
+  document.getElementById("submitBtn").disabled = true;
 
-    function startQuiz(subject) {
-      currentQuiz = quizzes[subject];
-      document.getElementById("quiz-title").textContent = currentQuiz.title;
-      document.getElementById("quiz-container").style.display = "block";
-      document.getElementById("quiz-form").innerHTML = "";
-      document.getElementById("result").innerHTML = "";
-      document.getElementById("submitBtn").disabled = false;
-// Disable all subject buttons once a quiz starts
-document.querySelectorAll(".subject-btn").forEach(btn => {
-  btn.disabled = true;
-});
-      currentQuiz.questions.forEach((item, index) => {
-        let qDiv = document.createElement("div");
-        qDiv.className = "question";
-        qDiv.innerHTML = `<p><b>${index+1}. ${item.q}</b></p>`;
-        let optionsDiv = document.createElement("div");
-        optionsDiv.className = "options";
-        item.o.forEach((opt, i) => {
-          let label = document.createElement("label");
-          label.innerHTML = `<input type="radio" name="q${index}" value="${i}"> ${opt}`;
-          optionsDiv.appendChild(label);
-        });
-        qDiv.appendChild(optionsDiv);
-        document.getElementById("quiz-form").appendChild(qDiv);
+  // Disable all subject buttons
+  document.querySelectorAll(".subject-btn").forEach(btn=>btn.disabled=true);
 
-        if (index === currentQuiz.questions.length - 1) {
-  document.getElementById("reviewNote").style.display = "block";
-}
-      });
+  currentQuiz.questions.forEach((q,index)=>{
+    let qDiv=document.createElement("div");
+    qDiv.className="question";
+    qDiv.innerHTML=`<p><b>${index+1}. ${q.q}</b></p>`;
+    let optsDiv=document.createElement("div");
+    optsDiv.className="options";
+    q.o.forEach((opt,i)=>{
+      let lbl=document.createElement("label");
+      lbl.innerHTML=`<input type="radio" name="q${index}" value="${i}"> ${opt}`;
+      lbl.querySelector("input").addEventListener("change", checkAllAnswered);
+      optsDiv.appendChild(lbl);
+    });
+    qDiv.appendChild(optsDiv);
+    document.getElementById("quiz-form").appendChild(qDiv);
+  });
 
-     // Clear any previous timer
-clearInterval(timerInterval);
-
-// Initialize timer
-timeLeft = currentQuiz.time;
-updateTimer(); // show initial time immediately
-
-// Start countdown
-timerInterval = setInterval(() => {
-  timeLeft--;
+  timeLeft=currentQuiz.time;
   updateTimer();
-  if (timeLeft <= 0) {
-    clearInterval(timerInterval);
-    submitQuiz(); // auto-submit when time is up
-  }
-}, 1000);
-
-    }
-
-    function updateTimer() {
-      let minutes = Math.floor(timeLeft / 60);
-      let seconds = timeLeft % 60;
-      document.getElementById("timer").textContent = `Time: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-    }
-
-    function submitQuiz() {
+  clearInterval(timerInterval);
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    updateTimer();
+    if(timeLeft<=0){
       clearInterval(timerInterval);
-      let form = document.getElementById("quiz-form");
-      let score = 0;
-     currentQuiz.questions.forEach((item, index) => {
-  let options = document.querySelectorAll(`input[name="q${index}"]`);
-  let answered = false;
-  options.forEach((opt, i) => {
-    if (i === item.a) opt.parentNode.classList.add("correct");
-    if (opt.checked && i !== item.a) opt.parentNode.classList.add("incorrect");
-    if (opt.checked) answered = true;
-    opt.disabled = true;
-  });
-  if (answered) {
-    let selectedIndex = Array.from(options).findIndex(o => o.checked);
-    if (selectedIndex === item.a) score++;
-  }
-});
-
-      document.getElementById("result").textContent = `You scored ${score} out of ${currentQuiz.questions.length}`;
-    } // ✅ Step 4: re-enable subject buttons after quiz ends
-  document.querySelectorAll(".subject-btn").forEach(btn => {
-    btn.disabled = false;
-  });
+      document.getElementById("submitBtn").disabled=false;
+      submitQuiz();
+    }
+  },1000);
 }
-  </script>
+
+function checkAllAnswered(){
+  const total=currentQuiz.questions.length;
+  let answered=0;
+  for(let i=0;i<total;i++){
+    if(document.querySelector(`input[name="q${i}"]:checked`)) answered++;
+  }
+  if(answered===total){
+    document.getElementById("reviewNote").style.display="block";
+    document.getElementById("submitBtn").disabled=true; // only enabled at timer end
+  }
+}
+
+function updateTimer(){
+  let m=Math.floor(timeLeft/60);
+  let s=timeLeft%60;
+  document.getElementById("timer").textContent=`Time: ${m}:${s<10?"0":""}${s}`;
+}
+
+function submitQuiz(){
+  clearInterval(timerInterval);
+  let form=document.getElementById("quiz-form");
+  let score=0;
+  currentQuiz.questions.forEach((q,index)=>{
+    let selected = form[`q${index}`] ? form[`q${index}`].value : null;
+    let options = form[`q${index}`];
+    for(let i=0;i<options.length;i++){
+      if(i==q.a) options[i].parentNode.classList.add("correct");
+      if(options[i].checked && i!=q.a) options[i].parentNode.classList.add("incorrect");
+      options[i].disabled=true;
+    }
+    if(selected!==null && parseInt(selected)===q.a) score++;
+  });
+  document.getElementById("result").textContent=`You scored ${score} out of ${currentQuiz.questions.length}`;
+  document.querySelectorAll(".subject-btn").forEach(btn=>btn.disabled=false);
+  document.getElementById("submitBtn").disabled=true;
+}
+</script>
 </body>
 </html>
-
-
-
-
-
-
