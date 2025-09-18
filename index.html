@@ -76,16 +76,8 @@
       color: #e53935;
     }
     #submitBtn {
-      display: block;
-      margin: 20px auto;
-      padding: 12px 25px;
-      background: #2196F3;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+  display: none; /* hide it completely */
+}
     #result {
       text-align: center;
       font-size: 20px;
@@ -112,10 +104,10 @@
     <h2 id="quiz-title"></h2>
     <div id="timer">Time: 00:00</div>
     <form id="quiz-form"></form>
+    <p id="reviewNote" style="display:none; color:blue; font-weight:bold;">
+  ✅ You have answered all questions. Please review your answers until the timer ends.
+</p>
     <button id="submitBtn" onclick="submitQuiz()" disabled>Submit Answers</button>
-    #submitBtn {
-  display: none; /* hide it completely */
-}
 
     <div id="result"></div>
   </div>
@@ -263,6 +255,10 @@ document.querySelectorAll(".subject-btn").forEach(btn => {
         });
         qDiv.appendChild(optionsDiv);
         document.getElementById("quiz-form").appendChild(qDiv);
+
+        if (index === currentQuiz.questions.length - 1) {
+  document.getElementById("reviewNote").style.display = "block";
+}
       });
 
       timeLeft = currentQuiz.time;
@@ -306,10 +302,15 @@ document.querySelectorAll(".subject-btn").forEach(btn => {
 }
       });
       document.getElementById("result").textContent = `You scored ${score} out of ${currentQuiz.questions.length}`;
-    }
+    } // ✅ Step 4: re-enable subject buttons after quiz ends
+  document.querySelectorAll(".subject-btn").forEach(btn => {
+    btn.disabled = false;
+  });
+}
   </script>
 </body>
 </html>
+
 
 
 
